@@ -1,0 +1,426 @@
+<div class="processorCarouselPanel">
+
+  <div id="myCarousel" class="carousel slide" data-interval="false" data-ride="carousel">
+    <!-- Left and right controls -->
+
+      <a  class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button"
+         data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+      <!-- Indicators class="indicators"-->
+      <ol class="carousel-indicators" style="position: absolute; top: 0px; height: 20px">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="4"></li>
+      </ol>
+
+
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner processorCarouselInner " role="listbox">
+
+      <!--STAGE 1 - DEFAULTS-->
+      <div class="item active">
+
+        <h3 class="yellowHeader">1/5 График</h3>
+        <hr class="shortHR">
+        <h4 class="yellowSubHeader">Какого типа?</h4>
+
+        <div id="chartType">
+          <a class="btn btn-default "
+             ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='bar' || whoIsActive=='stackedBar' || whoIsActive=='fullstackedBar')}"
+             ng-click="selectDefaultChart('bar')"><i class="fa fa-bar-chart fa-2x charticon"></i></a>
+          <a class="btn btn-default "
+             ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='pie' || whoIsActive=='doughnut')}"
+             ng-click="selectDefaultChart('pie')"><i
+            class="fa fa-pie-chart fa-2x charticon"></i></a>
+          <a class="btn btn-default "
+             ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='line' || whoIsActive=='stackedLine' || whoIsActive=='fullstackedLine')}"
+             ng-click="selectDefaultChart('line')"><i
+            class="fa fa-line-chart fa-2x charticon"></i></a>
+          <a class="btn btn-default "
+             ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='area' || whoIsActive=='stackedArea' || whoIsActive=='fullstackedArea')}"
+             ng-click="selectDefaultChart('area')"><i
+            class="fa fa-area-chart fa-2x charticon"></i></a>
+          <a class="btn btn-default "
+             ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='gauge')}"
+             ng-click="selectDefaultChart('gauge')"><i
+            class="fa fa-location-arrow fa-2x charticon"></i></a>
+          <a class="btn btn-default "
+             ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='scale')}"
+             ng-click="selectDefaultChart('scale')"><i
+            class="fa fa-ellipsis-v fa-2x charticon "></i></a>
+          <a class="btn btn-default "
+             ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='text')}"
+             ng-click="selectDefaultChart('text')"><i
+            class="fa fa-clone fa-2x charticon"></i></a>
+          <a class="btn btn-default "
+             ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='map')}"
+             ng-click="selectDefaultChart('map')"><i
+            class="fa fa-map-marker fa-2x charticon"></i></a>
+          <a class="btn btn-default "
+             ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='table')}"
+             ng-click="selectDefaultChart('table')"><i
+            class="fa fa-table fa-2x charticon"></i></a>
+        </div>
+
+        <div id="chartSubType">
+          <div ng-show="(whoIsActive=='bar' || whoIsActive=='stackedBar' || whoIsActive=='fullstackedBar')">
+            <hr class="shortHR"/>
+            <p class="yellowSubHeader">Бар-чарт:
+              <span ng-show=" whoIsActive=='bar'">обычный </span>
+              <span ng-show=" whoIsActive=='stackedBar'">стэкированный </span>
+              <span ng-show=" whoIsActive=='fullstackedBar'">стэкированный нормированный </span>
+            </p>
+            <button class="btn btn-default " ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='bar'}"
+                    ng-click="selectDefaultChart('bar')">Обычный
+            </button>
+            <button class="btn btn-default "
+                    ng-class="{'btn btn-default' : true, 'activechart' :  whoIsActive=='stackedBar'}"
+                    ng-click="selectDefaultChart('stackedBar')">Стэк
+            </button>
+            <button class="btn btn-default "
+                    ng-class="{'btn btn-default' : true, 'activechart' :  whoIsActive=='fullstackedBar'}"
+                    ng-click="selectDefaultChart('fullstackedBar')">Нормированный
+            </button>
+          </div>
+          <div ng-show="(whoIsActive=='pie' || whoIsActive=='doughnut')">
+            <hr class="shortHR"/>
+            <p class="yellowSubHeader">Пирог-чарт:
+              <span ng-show=" whoIsActive=='pie'">Обычный </span>
+              <span ng-show=" whoIsActive=='doughnut'">Пончик </span>
+            </p>
+            <button class="btn btn-default "
+                    ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='pie'}"
+                    ng-click="selectDefaultChart('pie')">Обычный
+            </button>
+            <button class="btn btn-default "
+                    ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='doughnut'}"
+                    ng-click="selectDefaultChart('doughnut')">Пончик
+            </button>
+          </div>
+          <div ng-show="(whoIsActive=='line' || whoIsActive=='stackedLine' || whoIsActive=='fullstackedLine')">
+            <hr class="shortHR"/>
+            <p class="yellowSubHeader">Линия:
+              <span ng-show=" whoIsActive=='line'">обычный </span>
+              <span ng-show=" whoIsActive=='stackedLine'">стэкированный </span>
+              <span ng-show=" whoIsActive=='fullstackedLine'">стэкированный нормированный </span>
+            </p>
+            <button class="btn btn-default " type="checkbox"
+                    ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='line'}"
+                    ng-click="selectDefaultChart('line')">Обычный
+            </button>
+            <button class="btn btn-default " type="checkbox"
+                    ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='stackedLine'}"
+                    ng-click="selectDefaultChart('stackedLine')">Стэк
+            </button>
+            <button class="btn btn-default " type="checkbox"
+                    ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='fullstackedLine'}"
+                    ng-click="selectDefaultChart('fullstackedLine')">Нормированный стэк
+            </button>
+          </div>
+          <div ng-show="(whoIsActive=='area' || whoIsActive=='stackedArea' || whoIsActive=='fullstackedArea')">
+            <hr class="shortHR"/>
+            <p class="yellowSubHeader">Область:
+              <span ng-show=" whoIsActive=='area'">обычный </span>
+              <span ng-show=" whoIsActive=='stackedArea'">стэкированный </span>
+              <span ng-show=" whoIsActive=='fullstackedArea'">стэкированный нормированный </span></p>
+            <button class="btn btn-default " type="checkbox"
+                    ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='area'}"
+                    ng-click="selectDefaultChart('area')">Обычный
+            </button>
+            <button class="btn btn-default " type="checkbox"
+                    ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='stackedArea'}"
+                    ng-click="selectDefaultChart('stackedArea')">Стэк
+            </button>
+            <button class="btn btn-default " type="checkbox"
+                    ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='fullstackedArea'}"
+                    ng-click="selectDefaultChart('fullstackedArea')">Нормированный стэк
+            </button>
+          </div>
+        </div>
+
+        <hr class="shortHR"> {{newProcCfg.settings.defaultWidth}}
+        <h4 class="yellowSubHeader">Размеры</h4>
+        <span class="label label-default col-sm-2" style="margin-right: 15px">Высота в px</span>
+        <input type="text" ng-model="newProcCfg.settings.defaultHeight" placeholder="Высота бокса" class="input-sm"/>
+        <br>
+        <span class="label label-default col-sm-2" style="margin-right: 15px">Ширина в px</span>
+        <input type="text" ng-model="newProcCfg.settings.defaultWidth" placeholder="Ширина бокса" class="input-sm"/>
+
+        <hr class="shortHR">
+        <h4 class="yellowSubHeader">Тип таблицы</h4>
+        <select class="input-sm" ng-options="o.fullName for o in tableOptions" ng-model="defaultTable"
+                ng-change="selectDefaultTable()"></select>
+
+      </div>
+
+      <!--STAGE 2 - PIVOT-->
+      <div class="item ">
+        <h3 class="yellowHeader">2/5 Пивот</h3>
+        <hr class="shortHR">
+        <small ng-if="tableConfig.table!='pivot'">Листайте дальше. Вы вы не выбирали пивотную таблицу</small>
+        <div id="1_pivot" ng-if="tableConfig.table=='pivot'">
+          <h4 class="yellowSubHeader">Добавить</h4>
+          <a class="btn btn-success" ng-click="AddNewPivotRow()"><i class="fa fa-plus-circle fa-2x "></i> Ряд</a>
+          <a class="btn btn-warning" ng-click="AddNewPivotColumn()"><i
+            class="fa fa-plus-circle fa-2x "></i>Колонка</a>
+          <a class="btn btn-info" ng-click="AddNewPivotData()"><i class="fa fa-plus-circle fa-2x "></i> Дата</a>
+
+          <!--Panel ALL-->
+          <div id="RowsColsDatas" ng-show="(pivotRows.length>0)||(pivotCols.length>0)||(pivotData.length>0)"
+               class="row">
+            <hr class="shortHR">
+            <!--Panel ROW-->
+            <div style="margin: 5px" class="col-sm-3">
+              <h4 class="yellowSubHeader" style="text-align: center">Ряды</h4>
+              <!--| filter: myFilterForRow track by $index-->
+              <ul id="myPivotTableRows" ui-sortable="sortableOptionsForFields" class="myul" ng-model="pivotRows">
+                <li ng-repeat=" newField in pivotRows" class="myListItemField">
+                  <div class="panel-body fluid ">
+                    <input type="text" ng-model="newField.fieldName" placeholder="Имя нового поля" class="input-sm"/>
+                    <input type="text" ng-model="newField.fieldAlias" placeholder="Алиас нового поля"
+                           class="input-sm"/>
+                    <input type="text" ng-model="newField.type" placeholder="Тип" class="input-sm"/>
+                    <a class="btn btn-danger " ng-click="pivotRows.splice($index, 1)"><i
+                      class="fa fa-minus-circle fa-1x "></i></a>
+                    <span class="badge">{{$index + 1}}</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!--Panel COL-->
+            <div style="margin: 5px" class="col-sm-3">
+              <h4 class="yellowSubHeader" style="text-align: center">Колонки</h4>
+              <ul id="myPivotTableCols" ui-sortable="sortableOptionsForFields" class="myul" ng-model="pivotCols">
+                <li ng-repeat=" newField in pivotCols "
+                    class="myListItemField">
+                  <!--| filter: myFilterForColumn track by $index-->
+                  <div class="panel-body ">
+                    <input type="text" ng-model="newField.fieldName" placeholder="Имя нового поля" class="input-sm"/>
+                    <input type="text" ng-model="newField.fieldAlias" placeholder="Алиас нового поля"
+                           class="input-sm"/>
+                    <input type="text" ng-model="newField.type" placeholder="Тип" class="input-sm"/>
+                    <input type="text" ng-model="newField.pivot.group" placeholder="Группировка" class="input-sm"/>
+                    <a class="btn btn-danger " ng-click="pivotCols.splice($index, 1)"><i
+                      class="fa fa-minus-circle fa-1x "></i></a>
+                    <span class="badge">{{$index + 1}}</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!--Panel DATA-->
+            <div style="margin: 5px" class="col-sm-3">
+              <h4 class="yellowSubHeader" style="text-align: center">Данные</h4>
+              <ul id="myPivotTableData" ui-sortable="sortableOptionsForFields" class="myul" ng-model="pivotData">
+                <li ng-repeat=" newField in pivotData"
+                    class="myListItemField">
+                  <!--| filter: myFilterForData track by $index-->
+                  <div class="panel-body ">
+                    <input type="text" ng-model="newField.fieldName" placeholder="Имя нового поля" class="input-sm"/>
+                    <input type="text" ng-model="newField.fieldAlias" placeholder="Алиас нового поля"
+                           class="input-sm"/>
+                    <input type="text" ng-model="newField.type" placeholder="Тип" class="input-sm"/>
+                    <input type="text" ng-model="newField.pivot.format" placeholder="Формат" class="input-sm"/>
+                    <input type="text" ng-model="newField.pivot.precision" placeholder="Цифр после запятой"
+                           class="input-sm"/>
+                    <a class="btn btn-danger " ng-click="pivotData.splice($index, 1)"><i
+                      class="fa fa-minus-circle fa-1x "></i></a>
+                    <span class="badge">{{$index + 1}}</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <hr class="shortHR">
+          <h4 class="yellowSubHeader">Настройки пивота</h4>
+
+          <div id="pivotSettings" class="row">
+            <div id="Totals" class="col-sm-4">
+              <h4 class="yellowSubHeader">Итоги</h4>
+
+              <div class="row">
+                <span class="label label-default col-sm-3" style="margin-right: 10px">Строки</span>
+                <a class="btn btn-default " ng-class="{'activechart' : (tableConfig.pivotConfig.showRowGrandTotals)}"
+                   ng-click="tableConfig.pivotConfig.showRowGrandTotals=!tableConfig.pivotConfig.showRowGrandTotals;">итог</a>
+                <a class="btn btn-default " ng-class="{'activechart' : (tableConfig.pivotConfig.showRowTotals)}"
+                   ng-click="tableConfig.pivotConfig.showRowTotals=!tableConfig.pivotConfig.showRowTotals;">подитог</a>
+              </div>
+              <div class="row">
+                <span class="label label-default col-sm-3" style="margin-right: 10px">Столбцы</span>
+                <a class="btn btn-default "
+                   ng-class="{'activechart' : (tableConfig.pivotConfig.showColumnGrandTotals)}"
+                   ng-click="tableConfig.pivotConfig.showColumnGrandTotals=!tableConfig.pivotConfig.showColumnGrandTotals;">итог</a>
+                <a class="btn btn-default " ng-class="{'activechart' : (tableConfig.pivotConfig.showColumnTotals)}"
+                   ng-click="tableConfig.pivotConfig.showColumnTotals=!tableConfig.pivotConfig.showColumnTotals;">подитог</a>
+              </div>
+            </div>
+
+            <div id="Expand" class="col-sm-4">
+              <h4 class="yellowSubHeader">Развернуть</h4>
+              <a class="btn btn-default " ng-class="{'activechart' : (tableConfig.pivotConfig.expandRows)}"
+                 ng-click="tableConfig.pivotConfig.expandRows=!tableConfig.pivotConfig.expandRows;">ряды</a>
+              <a class="btn btn-default " ng-class="{'activechart' : (tableConfig.pivotConfig.expandColumns)}"
+                 ng-click="tableConfig.pivotConfig.expandColumns=!tableConfig.pivotConfig.expandColumns;">столбцы</a>
+            </div>
+
+            <div id="Summsry" class="col-sm-4">
+              <h4 class="yellowSubHeader">Вид итога</h4>
+              <a class="btn btn-default "
+                 ng-class="{'activechart' : (tableConfig.pivotConfig.summaryType=='sum')}"
+                 ng-click="totalFunction('sum')">sum</a>
+              <a class="btn btn-default "
+                 ng-class="{'activechart' : (tableConfig.pivotConfig.summaryType=='min')}"
+                 ng-click="totalFunction('min')">min</a>
+              <a class="btn btn-default "
+                 ng-class="{'activechart' : (tableConfig.pivotConfig.summaryType=='max')}"
+                 ng-click="totalFunction('max')">max</a>
+              <a class="btn btn-default "
+                 ng-class="{'activechart' : (tableConfig.pivotConfig.summaryType=='avg')}"
+                 ng-click="totalFunction('avg')">avg</a>
+              <a class="btn btn-default "
+                 ng-class="{'activechart' : (tableConfig.pivotConfig.summaryType=='count')}"
+                 ng-click="totalFunction('count')">count</a>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+
+      <!--STAGE 3 - SIMPLE TABLE-->
+      <div class="item ">
+        <h3 class="yellowHeader">3/5 Простая таблица</h3>
+        <hr class="shortHR">
+        <small ng-if="tableConfig.table!='simple'">Листайте дальше. Вы вы не выбирали обычную таблицу</small>
+        <div id="2_simple" ng-if="tableConfig.table=='simple'">
+          <h4 class="yellowSubHeader">Добавить</h4>
+          <a class="btn btn-success" ng-click="AddNewSimpleTableField()"><i class="fa fa-plus-circle fa-2x "></i> Поле</a>
+
+          <div id="SimpleTableFields" ng-show="dataConfig.length>0" class="row">
+            <small>Перемещайте поля, чтобы задать их порядок в таблице</small>
+            <hr class="shortHR">
+            <h4 class="yellowSubHeader">Поля</h4>
+            <ul id="mySimpleTableFields" ui-sortable="sortableOptionsForFields" class="myul" ng-model="simpleFields">
+              <li ng-repeat=" newField in simpleFields"
+                  class="myListItem">
+                <div class="panel-body fluid ">
+                  <input type="text" ng-model="newField.fieldName" placeholder="Имя нового поля" class="input-sm"/>
+                  <input type="text" ng-model="newField.fieldAlias" placeholder="Алиас нового поля" class="input-sm"/>
+                  <input type="text" ng-model="newField.isX" placeholder="Аргумент" class="input-sm"/>
+                  <a class="btn btn-danger " ng-click="simpleFields.splice($index, 1)"><i
+                    class="fa fa-minus-circle fa-1x "></i></a>
+                  <span class="badge">{{$index + 1}}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!--STAGE 4 - SELECT-->
+      <div class="item ">
+        <h3 class="yellowHeader">4/5 SELECT</h3>
+        <hr class="shortHR">
+        <small>There will be a query</small>
+        <div id="select">
+          <h4 class="yellowSubHeader">Select * from </h4>
+        </div>
+      </div>
+
+      <!--STAGE 5 - CHART-->
+      <div class="item ">
+        <h3 class="yellowHeader">5/5 Дефолтный чарт</h3>
+        <hr class="shortHR">
+        <div id="gauge" ng-if="(whoIsActive=='gauge')||(whoIsActive=='scale')">
+          <h4 class="yellowSubHeader">Вы выбрали дефолтный чарт: Гаудж (шкала) </h4>
+
+          <div class="label label-default col-sm-2" style="margin-right: 15px">Начало</div>
+          <input type="text" ng-model="gaugeConfig.startValue" class="input-sm "/>
+          <br/>
+          <span class="label label-default col-sm-2" style="margin-right: 15px">Конец</span>
+          <input type="text" ng-model="gaugeConfig.endValue" class="input-sm "/>
+          <br/>
+          <span class="label label-default col-sm-2" style="margin-right: 15px">Деление maj</span>
+          <input type="text" ng-model="gaugeConfig.majorTick" class="input-sm"/>
+          <br/>
+          <span class="label label-default col-sm-2" style="margin-right: 15px">Деление min</span>
+          <input type="text" ng-model="gaugeConfig.minorTick" class="input-sm"/>
+          <br/>
+          <span class="label label-default col-sm-2" style="margin-right: 15px">Игла</span>
+          <input type="text" ng-model="gaugeConfig.valueIndicatorType" class="input-sm"/>
+          <br/>
+          <span class="label label-default col-sm-2" style="margin-right: 15px">Цвет иглы</span>
+          <input type="text" ng-model="gaugeConfig.valueIndicatorColor" class="input-sm"/>
+          <br/>
+          <span class="label label-default col-sm-2" style="margin-right: 15px">Подзаголовок</span>
+          <input type="text" ng-model="gaugeConfig.subtitle" class="input-sm"/>
+          <br/>
+          <span class="label label-default col-sm-2" style="margin-right: 15px">Ориентация</span>
+          <input type="text" ng-model="gaugeConfig.orientation" class="input-sm"/>
+
+          <br/>
+          <br/>
+
+          <div class="row ">
+            <label class="label label-danger col-sm-3 " style="margin-right: 15px">Красный диапазон</label>
+            <label class="label label-default " style="margin: 5px">от</label>
+            <input type="text" ng-model="gaugeConfig.ranges[0].startValue" class="input-sm"/>
+            <label class="label label-default " style="margin: 5px">до</label>
+            <input type="text" ng-model="gaugeConfig.ranges[0].endValue" class="input-sm"/>
+          </div>
+          <div class="row ">
+            <label class="label label-warning col-sm-3 " style="margin-right: 15px">Желтый диапазон</label>
+            <label class="label label-default " style="margin: 5px">от</label>
+            <input type="text" ng-model="gaugeConfig.ranges[1].startValue" class="input-sm"/>
+            <label class="label label-default " style="margin: 5px">до</label>
+            <input type="text" ng-model="gaugeConfig.ranges[1].endValue" class="input-sm"/>
+          </div>
+          <div class="row ">
+            <label class="label label-success col-sm-3 " style="margin-right: 15px">Зеленый диапазон</label>
+            <label class="label label-default " style="margin: 5px">от</label>
+            <input type="text" ng-model="gaugeConfig.ranges[2].startValue" class="input-sm"/>
+            <label class="label label-default " style="margin: 5px">до</label>
+            <input type="text" ng-model="gaugeConfig.ranges[2].endValue" class="input-sm"/>
+          </div>
+          <div class="row ">
+            <label class="label label-info col-sm-3 " style="margin-right: 15px">Синий диапазон</label>
+            <label class="label label-default " style="margin: 5px">от</label>
+            <input type="text" ng-model="gaugeConfig.ranges[3].startValue" class="input-sm"/>
+            <label class="label label-default " style="margin: 5px">до</label>
+            <input type="text" ng-model="gaugeConfig.ranges[3].endValue" class="input-sm"/>
+          </div>
+        </div>
+
+        <div id="text" ng-if="(whoIsActive=='text')" class="col-sm-12">
+          <h4 class="yellowSubHeader">Вы выбрали дефолтный чарт: карточка </h4>
+          <div class="label label-default col-sm-2"
+               ng-class="{'label-danger' : textConfig.importance=='danger', 'label-success' : textConfig.importance=='success', 'label-info' : textConfig.importance=='info' }"
+               style="margin-right: 15px">Важность</div>
+          <input type="text" ng-model="textConfig.importance" class="input-sm "/>
+          <br/>
+          <br/>
+          <span class="label label-default col-sm-2" style="margin-right: 15px">Текст</span>
+          <textarea type="text" ng-model="textConfig.caption" class="input-sm col-sm-9 "/>
+        </div>
+
+        <div id="map" ng-if="(whoIsActive=='map')">
+          <h4 class="yellowSubHeader">Вы выбрали дефолтный чарт: карта </h4>
+          <span> you re fucked up</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

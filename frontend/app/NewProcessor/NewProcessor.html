@@ -1,0 +1,31 @@
+<toast></toast>
+<div class="row" style="margin: 50px; margin-top: 15px;">
+
+  <!--ADD OR SEARCH-->
+  <div class="row">
+    <div class="col-sm-3">
+      <a class="btn btn-success btn-lg" ng-click="editProcessor()"><i class="fa fa-plus-square fa-2x charticon"></i>Новый
+        процессор </a>
+    </div>
+    <div class="col-sm-offset-1 col-sm-6">
+      <input type="text" class="form-control input-lg" placeholder="Поиск по имени процессора"
+             ng-model="procNameToLookFor">
+    </div>
+  </div>
+
+  <!--PROCS LIST TO EDIT-->
+  <div class="row col-sm-10" >
+    <h3>Найдено</h3>
+    <ul class="list-group">
+      <li class="list-group-item"
+          ng-repeat="proc in procsIcanEdit | filter: filterProcByName | orderBy : 'name' track by $index "
+        ng-click="editProcessor(proc.processor)">
+        <span class="badge">id = {{ proc.processor}}</span>
+        {{proc.name}}
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+

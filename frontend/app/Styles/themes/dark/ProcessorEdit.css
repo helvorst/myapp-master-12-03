@@ -1,0 +1,40 @@
+.processorCarouselPanel {
+  background: #3A3F44;
+  /*;*/
+  /*color: whitesmoke;*/
+  margin: 20px;
+  padding: 10px;
+  padding-top: 5px;
+  height: 1000px;
+  /*max-height: 2000px;*/
+  /*overflow-x: hidden;*/
+}
+
+.carousel{
+  margin-top: 10px;
+}
+.carousel-inner{
+  margin-top: 5px;
+}
+
+.processorCarouselInner{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.myListItemField {
+  background: whitesmoke;
+  float: left;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+
+.zoomProcessorContainer{
+  margin: 20px;
+}
+
+.carousel-control{
+  top: 15px;
+  bottom: auto;
+}

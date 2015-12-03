@@ -1,0 +1,129 @@
+
+.underCover {
+  display: none;
+
+}
+
+.yellowHeader{
+  color: orange;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 0, 0, 0, 0;
+  font-family: 'Jura', serif;
+}
+.yellowSubHeader{
+  color: orange;
+  text-align: left;
+  /*font-weight: bold;*/
+  text-shadow: 0, 0, 0, 0;
+  font-family: 'Jura', serif;
+}
+
+.yellowHR {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid orange;
+  /*margin: 1em 0;*/
+  padding: 0;
+  width: 90%;
+  alignment: center;
+}
+
+.shortHR {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid orange ;
+  /*margin: 1em 0;*/
+  padding: 0;
+  width: 70%;
+  alignment: left;
+  margin-left: 0;
+}
+/**/
+
+.myCarouselCnt{
+  margin-top: 13px;
+  top: 55px;
+  position: absolute;
+}
+
+.myCarouselBody{
+  position: absolute;
+  top: 0px;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 40px;
+  z-index: 5;
+  height: 40px;
+}
+.carousel-control.right{
+  background-image: none;
+  color: orange;
+}
+.carousel-control.left{
+  background-image: none;
+  color: orange;
+}
+.leftPanelClose{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.carousel{
+  position: relative;
+  height: 100%;
+  /*padding: 2em;*/
+}
+.item{
+  margin: auto;
+}
+
+.leftPanel a {
+  color: grey;
+}
+.leftPanel a:hover {
+  color: dimgrey;
+  text-decoration: none;
+  cursor: hand;
+}
+ol.carousel-indicators{
+  height: 20px;
+}
+.carousel-indicators li {
+  display: inline-block;
+  /*width: 20px;*/
+  /*height: 15px;*/
+  border: 2px solid black;
+  cursor: pointer;
+}
+.carousel-indicators .active {
+  /*display: inline-block;*/
+  background-color: orange;
+  /*border: 2px solid whitesmoke;*/
+  /*width: 20px;*/
+  /*height: 15px;*/
+}
+
+label {
+  font-weight: normal;
+}
+
+
+
+
+/*.btn.btn-default{*/
+  /*font-weight: 600;*/
+
+/*}*/
+.btn.btn-default.activechart{
+  color: black;
+  background: orange;
+}
+.btn.btn-default.activechart:hover{
+  color: black;
+}
+

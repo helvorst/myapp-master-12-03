@@ -1,0 +1,29 @@
+<toast></toast>
+
+<div class=" zoomProcessorContainer ">
+
+
+  <div id="zoomProcessorBottomPanel" style="margin: 15px; padding: 5px">
+
+    <span class="label label-default col-sm-2" style="margin-right: 15px">Имя процессора</span>
+    <div class="row"  resizable r-directions="['bottom']">
+      <textarea type="text" ng-model="newName" placeholder="Имя нового процессора" class="input-lg col-sm-12" style="height: 100%; border: 0px"/>
+    </div>
+
+    <div class="row">
+      <div id="footer" class=" modal-footer" style="">
+        <a class="btn btn-success" ng-click="ok()">Сохранить</a>
+        <a class="btn btn-warning" ng-click="cancel()">Отмена</a>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div id="zoomProcessorSettingsPanel" class="row" ng-include="'app/NewProcessor/ProcessorSettingsCarousel.html'"></div>
+
+
+</div>
+
+
+<!--->

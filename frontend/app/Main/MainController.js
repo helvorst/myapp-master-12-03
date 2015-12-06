@@ -1,10 +1,10 @@
 /**
  * Created by Hel on 13.10.2015.
  */
-tstApp.controller('MainController', function ($scope, $rootScope, ServiceExport, ngToast) {
+tstApp.controller('MainController', function ($scope, $rootScope, ServiceExport, ServiceToast) {
 
   //expose service
-  $scope.$ServiceExport= ServiceExport;
+  $scope.$ServiceExport = ServiceExport;
 
 //***********************SORTABLE***************************
 //**********************************************************
@@ -21,12 +21,12 @@ tstApp.controller('MainController', function ($scope, $rootScope, ServiceExport,
   };
 
   //Включение/отключение возможности таскания боксов
-  $scope.allowSorting = function (id){
+  $scope.allowSorting = function (id) {
     $scope.sortableOptions.disabled = !$scope.sortableOptions.disabled;
-    if(!$scope.sortableOptions.disabled)
-      ngToast.danger('Сортировка включена: чтобы переместить чарт, перетащите его контейнер в нужное место');
+    if (!$scope.sortableOptions.disabled)
+      ServiceToast.cookToast('Сортировка включена: чтобы переместить чарт, перетащите его контейнер в нужное место', 'warning')
     else
-      ngToast.info('Сортировка включена: Вы больше не можете перемещать чарты');
+      ServiceToast.cookToast('Сортировка включена: Вы больше не можете перемещать чарты', 'warning')
 
   }
 
@@ -38,4 +38,15 @@ tstApp.controller('MainController', function ($scope, $rootScope, ServiceExport,
     localStorage.setItem('theme', JSON.stringify(theme));
   }
 
+  $scope.setMute = function () {
+
+  $rootScope.mute = !$rootScope.mute;
+    //Запомнить
+    localStorage.setItem('mute', JSON.stringify($rootScope.mute));
+    if ($rootScope.mute)
+      ServiceToast.cookToast('Звук отключен', 'warning')
+    else
+      ServiceToast.cookToast('Звук включен', 'warning')
+
+  }
 })

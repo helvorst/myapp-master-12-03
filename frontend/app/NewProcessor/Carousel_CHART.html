@@ -1,0 +1,8 @@
+<h3 class="yellowHeader">5/5 Дефолтный чарт</h3>
+<hr class="shortHR">
+
+<div id="gauge" ng-if="(whoIsActive=='gauge')||(whoIsActive=='scale')" ng-include="'app/NewProcessor/chart_gauge.html'"></div>
+
+<div id="text" ng-if="(whoIsActive=='text')" class="col-sm-12"  ng-include="'app/NewProcessor/chart_text.html'"></div>
+
+<div id="map" ng-if="(whoIsActive=='map')" ng-include="'app/NewProcessor/chart_map.html'"></div>

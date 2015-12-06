@@ -47,7 +47,7 @@
   <!--<link rel="stylesheet" type="text/css" ng-href="app/Styles/themes/{{theme}}/styles.css"/>-->
   <link rel="stylesheet" type="text/css" ng-href="app/Styles/themes/{{theme}}/dx.common.css"/>
   <link rel="stylesheet" type="text/css" ng-href="app/Styles/themes/{{theme}}/dxweb.css"/>
-  <link rel="stylesheet" type="text/css" ng-href="app/Styles/themes/{{theme}}/dx.exporter.css"/>
+  <!--<link rel="stylesheet" type="text/css" ng-href="app/Styles/themes/{{theme}}/dx.exporter.css"/>-->
 
 
 
@@ -55,7 +55,7 @@
   <script type="text/javascript" src="app/JS/DX/dxchartsjs.js"></script>
   <script type="text/javascript" src="app/JS/DX/dx.webappjs.js"></script>
   <!--<script type="text/javascript" src="http://cdn3.devexpress.com/jslib/15.1.7/js/vectormap-data/world.js"></script>-->
-  <!--<script type="text/javascript" src="http://cdn3.devexpress.com/jslib/15.1.7/js/vectormap-utils/dx.vectormaputils.js"></script>-->
+  <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/15.1.7/js/vectormap-utils/dx.vectormaputils.js"></script>
   <!--<script src="app/dx.exporter.js"></script>-->
 
   <!--APPLICATION-->
@@ -84,18 +84,19 @@
 
   <!--services-->
   <script src="app/Services/REST.js"></script>
-  <script src="app/Box/ServiceDraw.js"></script>
-  <script src="app/Box/ServiceResize.js"></script>
-  <script src="app/Box/ServiceTable.js"></script>
-  <script src="app/Box/ServiceExport.js"></script>
-  <script src="app/Box/ServiceAnalysis.js"></script>
+  <script src="app/Services/ServiceDraw.js"></script>
+  <script src="app/Services/ServiceResize.js"></script>
+  <script src="app/Services/ServiceTable.js"></script>
+  <script src="app/Services/ServiceExport.js"></script>
+  <script src="app/Services/ServiceAnalysis.js"></script>
+  <script src="app/Services/ServiceToast.js"></script>
 
 
   <!--CHARTS OPTIONS-->
-  <script src="app/Box/ChartsOptions.js"></script>
+  <script src="TO%20BE%20CLEANED%20OUT/ChartsOptions.js"></script>
 
   <!--SERVICE FUNC-->
-  <script src="app/Box/ServiceFunc_PivotDatasource.js"></script>
+  <script src="app/Services/ServiceFunc_PivotDatasource.js"></script>
 
   <!--fake backend-->
   <script src="backendFAKE.js"></script>
@@ -105,16 +106,16 @@
   <!--<script src="app/jsPDF/jspdf.js"></script>-->
   <!--<script type="text/javascript" src="app/jsPDF/split_text_to_size.js"></script>-->
   <!--<script type="text/javascript" src="app/jsPDF/from_html.js"></script>-->
-  <script type="text/javascript" src="app/jsPDF/jszip.min.js"></script>
+  <!--<script type="text/javascript" src="app/jsPDF/jszip.min.js"></script>-->
 
-  <script type="text/javascript" src="app/jsPDF/FileSaver.js"></script>
+  <script type="text/javascript" src="app/JS/jsPDF/FileSaver.js"></script>
 
-  <script src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
+  <!--<script src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>-->
   <!--<script type="text/javascript" src="http://gabelerner.github.io/canvg/canvg.js"></script>-->
 
   <!--toast-->
-  <link rel="stylesheet" type="text/css" ng-href="bower_components/ngToast/dist/ngToast.min.css"/>
-  <script src="bower_components/ngToast/dist/ngToast.min.js"></script>
+  <link rel="stylesheet" href="bower_components/angular-toasty/dist/angular-toasty.min.css"/>
+  <script src="bower_components/angular-toasty/dist/angular-toasty.min.js"></script>
 
 </head>
 <body>
@@ -137,16 +138,20 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <a class="nav navbar-nav mybrandName" href="#">Параналитика-2015-12-03</a>
+        <a class="nav navbar-nav mybrandName" href="#">AnalyticUS</a>
         <!--имя залогинившегося пользователя и кнопка выхода-->
-        <div class="nav navbar-nav navbar-right" ng-show="LoggedInAs.result==true">
+        <div class="nav navbar-nav navbar-right" ng-show="LoggedInAs">
           <ul style="list-style-type: none; text-align: right" >
             <li style="" >
-              <div>{{LoggedInAs.name}}</div>
+              <div>
+                <span class="label label-default">{{LoggedInAs.fullName}}</span>
+                <span class="label label-danger" ng-if="LoggedInAs.isAdmin">администратор</span>
+                <span class="label label-warning" ng-if="LoggedInAs.isDeveloper">разработчик</span>
+              </div>
             </li>
             <li style="" >
               <a class="btn btn-default navbar-btn" ng-click="signOut()" title="Выйти">
-                <i class="fa fa-sign-out"></i> Выйти
+                <i class="fa fa-sign-out fa-1x"></i> Выйти
               </a>
             </li>
           </ul>
@@ -159,18 +164,11 @@
   </nav>
 
 
-  <!--<div id='exportMenu'></div>-->
-  <!--<div id="map" >-->
-    <!--&lt;!&ndash;<h3>Блохоловля</h3> class="fuckenChart"&ndash;&gt;-->
-  <!--</div>-->
-
-
-
     <!--<div class="page-container mypagecontainer">-->
 
         <div ui-view=""></div>
 
     <!--</div>-->
-
+  <toasty></toasty>
 </body>
 </html>

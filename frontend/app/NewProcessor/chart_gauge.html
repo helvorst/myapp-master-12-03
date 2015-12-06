@@ -1,0 +1,57 @@
+<h3 class="yellowSubHeader">Вы выбрали дефолтный чарт: гаудж (шкала) </h3>
+
+<div class="label label-default col-sm-2" style="margin-right: 15px">Начало</div>
+<input type="text" ng-model="gaugeConfig.startValue" class="input-sm "/>
+<br/>
+<span class="label label-default col-sm-2" style="margin-right: 15px">Конец</span>
+<input type="text" ng-model="gaugeConfig.endValue" class="input-sm "/>
+<br/>
+<span class="label label-default col-sm-2" style="margin-right: 15px">Деление maj</span>
+<input type="text" ng-model="gaugeConfig.majorTick" class="input-sm"/>
+<br/>
+<span class="label label-default col-sm-2" style="margin-right: 15px">Деление min</span>
+<input type="text" ng-model="gaugeConfig.minorTick" class="input-sm"/>
+<br/>
+<span class="label label-default col-sm-2" style="margin-right: 15px">Игла</span>
+<input type="text" ng-model="gaugeConfig.valueIndicatorType" class="input-sm"/>
+<br/>
+<span class="label label-default col-sm-2" style="margin-right: 15px">Цвет иглы</span>
+<input type="text" ng-model="gaugeConfig.valueIndicatorColor" class="input-sm"/>
+<br/>
+<span class="label label-default col-sm-2" style="margin-right: 15px">Подзаголовок</span>
+<input type="text" ng-model="gaugeConfig.subtitle" class="input-sm"/>
+<br/>
+<span class="label label-default col-sm-2" style="margin-right: 15px">Ориентация</span>
+<input type="text" ng-model="gaugeConfig.orientation" class="input-sm"/>
+
+<br/>
+<br/>
+
+<div class="row ">
+  <label class="label label-danger col-sm-3 " style="margin-right: 15px">Красный диапазон</label>
+  <label class="label label-default " style="margin: 5px">от</label>
+  <input type="text" ng-model="gaugeConfig.ranges[0].startValue" class="input-sm"/>
+  <label class="label label-default " style="margin: 5px">до</label>
+  <input type="text" ng-model="gaugeConfig.ranges[0].endValue" class="input-sm"/>
+</div>
+<div class="row ">
+  <label class="label label-warning col-sm-3 " style="margin-right: 15px">Желтый диапазон</label>
+  <label class="label label-default " style="margin: 5px">от</label>
+  <input type="text" ng-model="gaugeConfig.ranges[1].startValue" class="input-sm"/>
+  <label class="label label-default " style="margin: 5px">до</label>
+  <input type="text" ng-model="gaugeConfig.ranges[1].endValue" class="input-sm"/>
+</div>
+<div class="row ">
+  <label class="label label-success col-sm-3 " style="margin-right: 15px">Зеленый диапазон</label>
+  <label class="label label-default " style="margin: 5px">от</label>
+  <input type="text" ng-model="gaugeConfig.ranges[2].startValue" class="input-sm"/>
+  <label class="label label-default " style="margin: 5px">до</label>
+  <input type="text" ng-model="gaugeConfig.ranges[2].endValue" class="input-sm"/>
+</div>
+<div class="row ">
+  <label class="label label-info col-sm-3 " style="margin-right: 15px">Синий диапазон</label>
+  <label class="label label-default " style="margin: 5px">от</label>
+  <input type="text" ng-model="gaugeConfig.ranges[3].startValue" class="input-sm"/>
+  <label class="label label-default " style="margin: 5px">до</label>
+  <input type="text" ng-model="gaugeConfig.ranges[3].endValue" class="input-sm"/>
+</div>

@@ -1,0 +1,132 @@
+<h3 class="yellowHeader">2/5 Пивот</h3>
+<hr class="shortHR">
+<small ng-if="tableConfig.table!='pivot'">Листайте дальше. Вы вы не выбирали пивотную таблицу</small>
+<div id="1_pivot" ng-if="tableConfig.table=='pivot'">
+  <h4 class="yellowSubHeader">Добавить</h4>
+  <a class="btn btn-success" ng-click="AddNewPivotRow()"><i class="fa fa-plus-circle fa-2x "></i> Ряд</a>
+  <a class="btn btn-warning" ng-click="AddNewPivotColumn()"><i
+    class="fa fa-plus-circle fa-2x "></i>Колонка</a>
+  <a class="btn btn-info" ng-click="AddNewPivotData()"><i class="fa fa-plus-circle fa-2x "></i> Дата</a>
+
+  <!--Panel ALL-->
+  <div id="RowsColsDatas" ng-show="(pivotRows.length>0)||(pivotCols.length>0)||(pivotData.length>0)"
+       class="row">
+    <hr class="shortHR">
+    <!--Panel ROW-->
+    <div style="margin: 5px" class="col-sm-3">
+      <h4 class="yellowSubHeader" style="text-align: center">Ряды</h4>
+      <!--| filter: myFilterForRow track by $index-->
+      <ul id="myPivotTableRows" ui-sortable="sortableOptionsForFields" class="myul" ng-model="pivotRows">
+        <li ng-repeat=" newField in pivotRows" class="myListItemField">
+          <div class="panel-body fluid ">
+            <input type="text" ng-model="newField.fieldName" placeholder="Имя нового поля" class="input-sm"/>
+            <input type="text" ng-model="newField.fieldAlias" placeholder="Алиас нового поля"
+                   class="input-sm"/>
+            <input type="text" ng-model="newField.type" placeholder="Тип" class="input-sm"/>
+            <a class="btn btn-danger " ng-click="pivotRows.splice($index, 1)"><i
+              class="fa fa-minus-circle fa-1x "></i></a>
+            <span class="badge">{{$index + 1}}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!--Panel COL-->
+    <div style="margin: 5px" class="col-sm-3">
+      <h4 class="yellowSubHeader" style="text-align: center">Колонки</h4>
+      <ul id="myPivotTableCols" ui-sortable="sortableOptionsForFields" class="myul" ng-model="pivotCols">
+        <li ng-repeat=" newField in pivotCols "
+            class="myListItemField">
+          <!--| filter: myFilterForColumn track by $index-->
+          <div class="panel-body ">
+            <input type="text" ng-model="newField.fieldName" placeholder="Имя нового поля" class="input-sm"/>
+            <input type="text" ng-model="newField.fieldAlias" placeholder="Алиас нового поля"
+                   class="input-sm"/>
+            <input type="text" ng-model="newField.type" placeholder="Тип" class="input-sm"/>
+            <input type="text" ng-model="newField.pivot.group" placeholder="Группировка" class="input-sm"/>
+            <a class="btn btn-danger " ng-click="pivotCols.splice($index, 1)"><i
+              class="fa fa-minus-circle fa-1x "></i></a>
+            <span class="badge">{{$index + 1}}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!--Panel DATA-->
+    <div style="margin: 5px" class="col-sm-3">
+      <h4 class="yellowSubHeader" style="text-align: center">Данные</h4>
+      <ul id="myPivotTableData" ui-sortable="sortableOptionsForFields" class="myul" ng-model="pivotData">
+        <li ng-repeat=" newField in pivotData"
+            class="myListItemField">
+          <!--| filter: myFilterForData track by $index-->
+          <div class="panel-body ">
+            <input type="text" ng-model="newField.fieldName" placeholder="Имя нового поля" class="input-sm"/>
+            <input type="text" ng-model="newField.fieldAlias" placeholder="Алиас нового поля"
+                   class="input-sm"/>
+            <input type="text" ng-model="newField.type" placeholder="Тип" class="input-sm"/>
+            <input type="text" ng-model="newField.pivot.format" placeholder="Формат" class="input-sm"/>
+            <input type="text" ng-model="newField.pivot.precision" placeholder="Цифр после запятой"
+                   class="input-sm"/>
+            <a class="btn btn-danger " ng-click="pivotData.splice($index, 1)"><i
+              class="fa fa-minus-circle fa-1x "></i></a>
+            <span class="badge">{{$index + 1}}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="shortHR">
+  <h4 class="yellowSubHeader">Настройки пивота</h4>
+
+  <div id="pivotSettings" class="row">
+    <div id="Totals" class="col-sm-4">
+      <h4 class="yellowSubHeader">Итоги</h4>
+
+      <div class="row">
+        <span class="label label-default col-sm-3" style="margin-right: 10px">Строки</span>
+        <a class="btn btn-default " ng-class="{'activechart' : (tableConfig.pivotConfig.showRowGrandTotals)}"
+           ng-click="tableConfig.pivotConfig.showRowGrandTotals=!tableConfig.pivotConfig.showRowGrandTotals;">итог</a>
+        <a class="btn btn-default " ng-class="{'activechart' : (tableConfig.pivotConfig.showRowTotals)}"
+           ng-click="tableConfig.pivotConfig.showRowTotals=!tableConfig.pivotConfig.showRowTotals;">подитог</a>
+      </div>
+      <div class="row">
+        <span class="label label-default col-sm-3" style="margin-right: 10px">Столбцы</span>
+        <a class="btn btn-default "
+           ng-class="{'activechart' : (tableConfig.pivotConfig.showColumnGrandTotals)}"
+           ng-click="tableConfig.pivotConfig.showColumnGrandTotals=!tableConfig.pivotConfig.showColumnGrandTotals;">итог</a>
+        <a class="btn btn-default " ng-class="{'activechart' : (tableConfig.pivotConfig.showColumnTotals)}"
+           ng-click="tableConfig.pivotConfig.showColumnTotals=!tableConfig.pivotConfig.showColumnTotals;">подитог</a>
+      </div>
+    </div>
+
+    <div id="Expand" class="col-sm-4">
+      <h4 class="yellowSubHeader">Развернуть</h4>
+      <a class="btn btn-default " ng-class="{'activechart' : (tableConfig.pivotConfig.expandRows)}"
+         ng-click="tableConfig.pivotConfig.expandRows=!tableConfig.pivotConfig.expandRows;">ряды</a>
+      <a class="btn btn-default " ng-class="{'activechart' : (tableConfig.pivotConfig.expandColumns)}"
+         ng-click="tableConfig.pivotConfig.expandColumns=!tableConfig.pivotConfig.expandColumns;">столбцы</a>
+    </div>
+
+    <div id="Summsry" class="col-sm-4">
+      <h4 class="yellowSubHeader">Вид итога</h4>
+      <a class="btn btn-default "
+         ng-class="{'activechart' : (tableConfig.pivotConfig.summaryType=='sum')}"
+         ng-click="totalFunction('sum')">sum</a>
+      <a class="btn btn-default "
+         ng-class="{'activechart' : (tableConfig.pivotConfig.summaryType=='min')}"
+         ng-click="totalFunction('min')">min</a>
+      <a class="btn btn-default "
+         ng-class="{'activechart' : (tableConfig.pivotConfig.summaryType=='max')}"
+         ng-click="totalFunction('max')">max</a>
+      <a class="btn btn-default "
+         ng-class="{'activechart' : (tableConfig.pivotConfig.summaryType=='avg')}"
+         ng-click="totalFunction('avg')">avg</a>
+      <a class="btn btn-default "
+         ng-class="{'activechart' : (tableConfig.pivotConfig.summaryType=='count')}"
+         ng-click="totalFunction('count')">count</a>
+    </div>
+
+
+  </div>
+
+</div>
+

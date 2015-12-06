@@ -1,4 +1,5 @@
-var tstApp = angular.module('tstApp', ['dx', 'ui.bootstrap', 'restangular', 'ui.router', 'ui.sortable', 'angularResizable',  'ngToast']);
+var tstApp = angular.module('tstApp', ['dx', 'ui.bootstrap', 'restangular', 'ui.router', 'ui.sortable', 'angularResizable',
+  'angular-toasty']);
 
 //Правило для запрета доступа
 angular.module('tstApp').run(['$rootScope', '$state',  function ($rootScope, $state) {
@@ -42,17 +43,18 @@ angular.module('tstApp').run(['$rootScope', '$state',  function ($rootScope, $st
   });
 }])
 
-//Toast config
-angular.module('tstApp')
-  .config(['ngToastProvider', function(ngToast) {
-    ngToast.configure({
-      verticalPosition: 'bottom',
-      horizontalPosition: 'left',
-      maxNumber: 2,
-      dismissOnTimeout: true,
-      timeout: 5000,
-      //dismissButton: true,
-      dismissOnClick: true,
-      animation: 'fade'
-    });
-  }]);
+
+
+angular.module('tstApp').config(['toastyConfigProvider', function(toastyConfigProvider) {
+  toastyConfigProvider.setConfig({
+    sound: true,
+    shake: false,
+    showClose: true,
+    clickToClose: true,
+    timeout: 5000,
+    html: true,
+    limit: 3,
+    theme: 'bootstrap' //
+  });
+}]);
+

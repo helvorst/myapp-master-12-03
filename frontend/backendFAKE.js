@@ -16,8 +16,8 @@ angular.module('tstApp')
 
     var okAdmin = {
       result: true,
-      name: "Токаш-оол Кан-Демир Сергеевич",
-      isAdmin: true
+      fullName: "Токаш-оол Кан-Демир Сергеевич",
+      roles: ['Administrator']
     }
 
     var failUser = {
@@ -272,54 +272,53 @@ angular.module('tstApp')
 
         }
       }
-      //,
-      //{
-      //  name: "Площадь стран",
-      //  id: 4,
-      //  settings: {
-      //    chartConfig: {
-      //      //====Что за карта
-      //      mapURL: 'app/ko/ko',
-      //      //====Размеры
-      //      precision: 2, //сколько точек после запятой
-      //      zoom: 65,
-      //      center: [49.64, 58.59],
-      //      //size: {
-      //      //  width: 1000,
-      //      //  height: 700
-      //      //},
-      //      //====Палитра
-      //      //palette: "Pastel",
-      //      //paletteSize: 9,
-      //      //====Маркеры
-      //      markers: {
-      //        enabled: true,
-      //        markerValuesNames: ['Эстерриториальное ТО1', 'Еще херня-2', 'Еще херня-3'],
-      //        mapMarkerType: "bubble",
-      //        sizeGroups: [0, 7000, 10000, 100000, 500000]
-      //      },
-      //      //===Лейблы
-      //      label: {
-      //        enabled: true
-      //      },
-      //      //====Группы значений
-      //      grouping: {
-      //        enabled: true,
-      //        groups: [0, 20, 24, 26, 30, 300],
-      //        palette: 'Ocean', //['blue', 'yellow']
-      //      }
-      //
-      //    },
-      //    dataConfig: {
-      //      ggg: 0
-      //    },
-      //    defaultKind: 'map',
-      //    defaultHeight: 600,
-      //    defaultWidth: 600,
-      //  },
-      //  //pivot: true,
-      //  processor: 15
-      //}
+      ,
+      {
+        name: "Площадь стран",
+        id: 5,
+        settings: {
+          chartConfig: {
+            //====Что за карта
+            mapURL: 'app/ko/ko',
+            //====Размеры
+            precision: 2, //сколько точек после запятой
+            zoom: 65,
+            center: [49.64, 58.59],
+            //size: {
+            //  width: 1000,
+            //  height: 700
+            //},
+            //====Палитра
+            //palette: "Pastel",
+            //paletteSize: 9,
+            //====Маркеры
+            markers: {
+              enabled: true,
+              markerValuesNames: ['Эстерриториальное ТО1', 'Еще херня-2', 'Еще херня-3'],
+              mapMarkerType: "bubble",
+              sizeGroups: [0, 7000, 10000, 100000, 500000]
+            },
+            //===Лейблы
+            label: {
+              enabled: true
+            },
+            //====Группы значений
+            grouping: {
+              enabled: true,
+              groups: [0, 20, 24, 26, 30, 300],
+              palette: 'Bright', //['blue', 'yellow']
+            }
+
+          },
+          dataConfig: {
+          },
+          defaultKind: 'map',
+          defaultHeight: 600,
+          defaultWidth: 600,
+          tableConfig: {}
+        },
+        processor: 15
+      }
 
 
       //

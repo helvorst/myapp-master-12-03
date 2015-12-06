@@ -1,7 +1,7 @@
 /**
  * Created by Hel on 28.09.2015.
  */
-tstApp.controller('DashController', function ($scope, $rootScope, appConstants, $stateParams, ServiceResize, ngToast) {
+tstApp.controller('DashController', function ($scope, $rootScope, appConstants, $stateParams, ServiceResize) {
 
   //Раскопать имя текущего дэшборда из параметров стейта
   $rootScope.dashId = $stateParams.dashID;

@@ -11,6 +11,14 @@ tstApp.controller('IndexController', function ($scope, $rootScope, $state) {
     $rootScope.theme = 'light';
   }
 
+  //was sound turned off
+  if(localStorage.getItem('mute')) {
+    $rootScope.mute = JSON.parse(localStorage.getItem('mute'));
+  }
+  else {
+    $rootScope.mute = false;
+  }
+
 
   //Функция для кнопки ВЫХОД
   $scope.signOut = function () {

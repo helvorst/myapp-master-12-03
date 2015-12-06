@@ -11,9 +11,10 @@ tstApp.controller('LoginController', function ($scope, $rootScope, REST, $state)
       .then(function (authAnswer) {
 
         var ans = authAnswer.plain();
-        if(ans.result == true)
+        if(ans)
         {
-
+          if(ans.roles.indexOf('Administrator')>-1)
+          ans.isAdmin = true;
           //store in cookies
           $rootScope.LoggedInAs = ans;
           localStorage.setItem('LoggedInAs', JSON.stringify(ans));
@@ -27,6 +28,7 @@ tstApp.controller('LoginController', function ($scope, $rootScope, REST, $state)
 
       },
       function (error) {
+        $scope.okCredentials = false;
         console.log("Не удалось авторизоваться ");
         console.log(error);
       })

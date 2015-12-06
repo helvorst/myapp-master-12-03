@@ -202,7 +202,7 @@ tstApp.factory("ServiceTable", function ($rootScope, ServiceAnalysis) {
             var hue = palette[e.cell.dataIndex];
             var hsla = 'hsla(' + hue + ', 85%, ' + variation + '%, 1)'
 
-            console.log(value + '; ' + hsla)
+            //console.log(value + '; ' + hsla)
             e.cellElement.css("background", hsla); //'rgb(' + color + ')');
           }
           //if (heatmap.onWithTotal) {

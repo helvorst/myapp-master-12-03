@@ -1,0 +1,26 @@
+<h3 class="yellowHeader">3/5 Простая таблица</h3>
+<hr class="shortHR">
+<small ng-if="tableConfig.table!='simple'">Листайте дальше. Вы вы не выбирали обычную таблицу</small>
+<div id="2_simple" ng-if="tableConfig.table=='simple'">
+  <h4 class="yellowSubHeader">Добавить</h4>
+  <a class="btn btn-success" ng-click="AddNewSimpleTableField()"><i class="fa fa-plus-circle fa-2x "></i> Поле</a>
+
+  <div id="SimpleTableFields" ng-show="dataConfig.length>0" class="row">
+    <small>Перемещайте поля, чтобы задать их порядок в таблице</small>
+    <hr class="shortHR">
+    <h4 class="yellowSubHeader">Поля</h4>
+    <ul id="mySimpleTableFields" ui-sortable="sortableOptionsForFields" class="myul" ng-model="simpleFields">
+      <li ng-repeat=" newField in simpleFields"
+          class="myListItem">
+        <div class="panel-body fluid ">
+          <input type="text" ng-model="newField.fieldName" placeholder="Имя нового поля" class="input-sm"/>
+          <input type="text" ng-model="newField.fieldAlias" placeholder="Алиас нового поля" class="input-sm"/>
+          <input type="text" ng-model="newField.isX" placeholder="Аргумент" class="input-sm"/>
+          <a class="btn btn-danger " ng-click="simpleFields.splice($index, 1)"><i
+            class="fa fa-minus-circle fa-1x "></i></a>
+          <span class="badge">{{$index + 1}}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

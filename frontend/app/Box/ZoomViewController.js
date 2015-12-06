@@ -1,20 +1,37 @@
 /**
  * Created by Hel on 03.11.2015.
  */
-tstApp.controller("ZoomViewController", function ($scope, $uibModalInstance, DataToPassInModal, ServiceDraw, ServiceExport, ServiceResize, ServiceTable, ServiceAnalysis, $rootScope, $timeout, $window, ngToast) {
+tstApp.controller("ZoomViewController", function ($scope, $uibModalInstance, DataToPassInModal,
+                                                  ServiceDraw, ServiceExport, ServiceResize, ServiceTable,
+                                                  ServiceAnalysis, $rootScope, $timeout, $window, ServiceToast) {
 
     $scope.chartInfo = DataToPassInModal.chartInfo;
     $scope.myData = DataToPassInModal.myData;
     $scope.whoIsActive = DataToPassInModal.whoIsActive;
+    $scope.legendOn = true;
+
+    $scope.showLegend = function () {
+      //change value to opposite
+      $scope.legendOn = !$scope.legendOn;
+      //get DX object
+      var chart = ServiceDraw.returnDXInstance($scope.whoIsActive, '#chart');
+      //fill it with new option
+      chart.option({
+        legend: {visible: $scope.legendOn}
+      });
+
+
+    };
 
     //expose service
     $scope.$ServiceExport = ServiceExport;
 
     $scope.draw = function (whoIsActive) {
 
-      if ($scope.toDismissOld)
-        ngToast.dismiss($scope.toDismissOld);
-      $scope.toDismissOld = ngToast.success('Будет нарисован ' + whoIsActive);
+      //by default legend is always on
+      $scope.legendOn = true;
+
+      ServiceToast.cookToast('Будет нарисован ' + whoIsActive, 'info')
 
       $scope.whoIsActive = whoIsActive;
       $rootScope.mycharts[$scope.chartInfo.id].whoIsActive = $scope.whoIsActive;
@@ -52,6 +69,9 @@ tstApp.controller("ZoomViewController", function ($scope, $uibModalInstance, Dat
     };
 
     $scope.cancel = function () {
+
+      ServiceToast.dismissAll();
+
       $uibModalInstance.dismiss('cancel');
     };
 
@@ -62,17 +82,19 @@ tstApp.controller("ZoomViewController", function ($scope, $uibModalInstance, Dat
 
 
     $scope.hideSettings = function () {
-      if ($("#zoomViewLeftPanel").hasClass('col-md-4')) {
-        $("#zoomViewLeftPanel").removeClass('col-md-4');
+
+      //this function wont work if #zoomViewLeftPanel width is changed to smt else from col-md-3
+      if ($("#zoomViewLeftPanel").hasClass('col-md-3')) {
+        $("#zoomViewLeftPanel").removeClass('col-md-3');
         $("#zoomViewLeftPanel").addClass('underCover');
-        $("#zoomViewMainPanel").removeClass('col-md-8');
+        $("#zoomViewMainPanel").removeClass('col-md-9');
         $("#zoomViewMainPanel").addClass('col-md-12');
       }
       else {
         $("#zoomViewLeftPanel").removeClass('underCover');
-        $("#zoomViewLeftPanel").addClass('col-md-4');
+        $("#zoomViewLeftPanel").addClass('col-md-3');
         $("#zoomViewMainPanel").removeClass('col-md-12');
-        $("#zoomViewMainPanel").addClass('col-md-8');
+        $("#zoomViewMainPanel").addClass('col-md-9');
       }
       //Refresh
       ServiceResize.renderChartDependingOnItsType($scope.whoIsActive, "#chart");
@@ -85,13 +107,13 @@ tstApp.controller("ZoomViewController", function ($scope, $uibModalInstance, Dat
 
     $scope.showTotalsPivotTable = function () {
 
-      ngToast.success('Отображение итогов изменено');
+      ServiceToast.cookToast('Отображение итогов изменено', 'info')
       $('#pivotTable').dxPivotGrid($scope.chartInfo.settings.tableConfig.pivotConfig);
 
     }
 
     $scope.expand = function () {
-      ngToast.success( { content: '<p>Ряды развернуты: ' + ($scope.chartInfo.settings.tableConfig.pivotConfig.expandRows ? 'да':'нет') + '</p><p>Столбцы развернуты: ' + ($scope.chartInfo.settings.tableConfig.pivotConfig.expandColumns ? 'да':'нет') + '</p>' });
+      ServiceToast.cookToast( '<p>Ряды развернуты: ' + ($scope.chartInfo.settings.tableConfig.pivotConfig.expandRows ? 'да' : 'нет') + '</p><p>Столбцы развернуты: ' + ($scope.chartInfo.settings.tableConfig.pivotConfig.expandColumns ? 'да' : 'нет') + '</p>', 'info')
       ServiceTable.expand($scope.chartInfo.settings.tableConfig.pivotConfig.expandRows, $scope.chartInfo.settings.tableConfig.pivotConfig.expandColumns);
     }
 
@@ -101,9 +123,9 @@ tstApp.controller("ZoomViewController", function ($scope, $uibModalInstance, Dat
 
       //restorePivot from forcefully added measures
       restorePivot(dataSource, true);
-      ngToast.warning('Анализ пришлось отключить');
+      ServiceToast.cookToast('Анализ пришлось отключить', 'warning')
 
-      ngToast.success('Выбрана новая аггрегатная функция: ' + $scope.chartInfo.settings.tableConfig.pivotConfig.summaryType);
+      ServiceToast.cookToast('Выбрана новая аггрегатная функция: ' + $scope.chartInfo.settings.tableConfig.pivotConfig.summaryType, 'info')
 
 
       $scope.chartInfo.settings.tableConfig.pivotConfig.summaryType = newType;
@@ -155,11 +177,12 @@ tstApp.controller("ZoomViewController", function ($scope, $uibModalInstance, Dat
     $scope.heatmap = function () {
 
       if ($scope.chartInfo.settings.tableConfig.pivotConfig.heatmap.on)
-        ngToast.success('Heatmap для области данных включен');
+        ServiceToast.cookToast('Heatmap для области данных включен', 'info')
       else
-        ngToast.info('Heatmap для области данных выключен');
+        ServiceToast.cookToast('Heatmap для области данных выключен', 'info')
 
       var ds = $('#pivotTable').dxPivotGrid('instance').getDataSource()
+
 
       //when main turned off, minor also should be
       //if (!$scope.chartInfo.settings.tableConfig.pivotConfig.heatmap.on)
@@ -180,12 +203,11 @@ tstApp.controller("ZoomViewController", function ($scope, $uibModalInstance, Dat
       $scope.showTotalsPivotTable();
 
       if (isOn) {
-        ngToast.success('Показатель включен');
-        ngToast.warning('Внимание: итоги и подитоги по столбцам были скрыты');
+        ServiceToast.cookToast('Показатель включен', 'info')
+        ServiceToast.cookToast('Внимание: итоги и подитоги по столбцам были скрыты', 'warning')
       }
       else
-        ngToast.info('Показатель выключен');
-
+        ServiceToast.cookToast('Показатель выключен', 'info')
 
       var ds = $('#pivotTable').dxPivotGrid('instance').getDataSource();
 

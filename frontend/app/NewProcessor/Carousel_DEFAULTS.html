@@ -1,0 +1,130 @@
+<h3 class="yellowHeader">1/5 График</h3>
+<hr class="shortHR">
+<h4 class="yellowSubHeader">Какого типа?</h4>
+
+<div id="chartType">
+  <a class="btn btn-default "
+     ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='bar' || whoIsActive=='stackedBar' || whoIsActive=='fullstackedBar')}"
+     ng-click="selectDefaultChart('bar')"><i class="fa fa-bar-chart fa-2x charticon"></i></a>
+  <a class="btn btn-default "
+     ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='pie' || whoIsActive=='doughnut')}"
+     ng-click="selectDefaultChart('pie')"><i
+    class="fa fa-pie-chart fa-2x charticon"></i></a>
+  <a class="btn btn-default "
+     ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='line' || whoIsActive=='stackedLine' || whoIsActive=='fullstackedLine')}"
+     ng-click="selectDefaultChart('line')"><i
+    class="fa fa-line-chart fa-2x charticon"></i></a>
+  <a class="btn btn-default "
+     ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='area' || whoIsActive=='stackedArea' || whoIsActive=='fullstackedArea')}"
+     ng-click="selectDefaultChart('area')"><i
+    class="fa fa-area-chart fa-2x charticon"></i></a>
+  <a class="btn btn-default "
+     ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='gauge')}"
+     ng-click="selectDefaultChart('gauge')"><i
+    class="fa fa-location-arrow fa-2x charticon"></i></a>
+  <a class="btn btn-default "
+     ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='scale')}"
+     ng-click="selectDefaultChart('scale')"><i
+    class="fa fa-ellipsis-v fa-2x charticon "></i></a>
+  <a class="btn btn-default "
+     ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='text')}"
+     ng-click="selectDefaultChart('text')"><i
+    class="fa fa-clone fa-2x charticon"></i></a>
+  <a class="btn btn-default "
+     ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='map')}"
+     ng-click="selectDefaultChart('map')"><i
+    class="fa fa-map-marker fa-2x charticon"></i></a>
+  <a class="btn btn-default "
+     ng-class="{'btn btn-default' : true, 'activechart' : (whoIsActive=='table')}"
+     ng-click="selectDefaultChart('table')"><i
+    class="fa fa-table fa-2x charticon"></i></a>
+</div>
+
+<div id="chartSubType">
+  <div ng-show="(whoIsActive=='bar' || whoIsActive=='stackedBar' || whoIsActive=='fullstackedBar')">
+    <hr class="shortHR"/>
+    <p class="yellowSubHeader">Бар-чарт:
+      <span ng-show=" whoIsActive=='bar'">обычный </span>
+      <span ng-show=" whoIsActive=='stackedBar'">стэкированный </span>
+      <span ng-show=" whoIsActive=='fullstackedBar'">стэкированный нормированный </span>
+    </p>
+    <button class="btn btn-default " ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='bar'}"
+            ng-click="selectDefaultChart('bar')">Обычный
+    </button>
+    <button class="btn btn-default "
+            ng-class="{'btn btn-default' : true, 'activechart' :  whoIsActive=='stackedBar'}"
+            ng-click="selectDefaultChart('stackedBar')">Стэк
+    </button>
+    <button class="btn btn-default "
+            ng-class="{'btn btn-default' : true, 'activechart' :  whoIsActive=='fullstackedBar'}"
+            ng-click="selectDefaultChart('fullstackedBar')">Нормированный
+    </button>
+  </div>
+  <div ng-show="(whoIsActive=='pie' || whoIsActive=='doughnut')">
+    <hr class="shortHR"/>
+    <p class="yellowSubHeader">Пирог-чарт:
+      <span ng-show=" whoIsActive=='pie'">Обычный </span>
+      <span ng-show=" whoIsActive=='doughnut'">Пончик </span>
+    </p>
+    <button class="btn btn-default "
+            ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='pie'}"
+            ng-click="selectDefaultChart('pie')">Обычный
+    </button>
+    <button class="btn btn-default "
+            ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='doughnut'}"
+            ng-click="selectDefaultChart('doughnut')">Пончик
+    </button>
+  </div>
+  <div ng-show="(whoIsActive=='line' || whoIsActive=='stackedLine' || whoIsActive=='fullstackedLine')">
+    <hr class="shortHR"/>
+    <p class="yellowSubHeader">Линия:
+      <span ng-show=" whoIsActive=='line'">обычный </span>
+      <span ng-show=" whoIsActive=='stackedLine'">стэкированный </span>
+      <span ng-show=" whoIsActive=='fullstackedLine'">стэкированный нормированный </span>
+    </p>
+    <button class="btn btn-default " type="checkbox"
+            ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='line'}"
+            ng-click="selectDefaultChart('line')">Обычный
+    </button>
+    <button class="btn btn-default " type="checkbox"
+            ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='stackedLine'}"
+            ng-click="selectDefaultChart('stackedLine')">Стэк
+    </button>
+    <button class="btn btn-default " type="checkbox"
+            ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='fullstackedLine'}"
+            ng-click="selectDefaultChart('fullstackedLine')">Нормированный стэк
+    </button>
+  </div>
+  <div ng-show="(whoIsActive=='area' || whoIsActive=='stackedArea' || whoIsActive=='fullstackedArea')">
+    <hr class="shortHR"/>
+    <p class="yellowSubHeader">Область:
+      <span ng-show=" whoIsActive=='area'">обычный </span>
+      <span ng-show=" whoIsActive=='stackedArea'">стэкированный </span>
+      <span ng-show=" whoIsActive=='fullstackedArea'">стэкированный нормированный </span></p>
+    <button class="btn btn-default " type="checkbox"
+            ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='area'}"
+            ng-click="selectDefaultChart('area')">Обычный
+    </button>
+    <button class="btn btn-default " type="checkbox"
+            ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='stackedArea'}"
+            ng-click="selectDefaultChart('stackedArea')">Стэк
+    </button>
+    <button class="btn btn-default " type="checkbox"
+            ng-class="{'btn btn-default' : true, 'activechart' : whoIsActive=='fullstackedArea'}"
+            ng-click="selectDefaultChart('fullstackedArea')">Нормированный стэк
+    </button>
+  </div>
+</div>
+
+<hr class="shortHR"> {{newProcCfg.settings.defaultWidth}}
+<h4 class="yellowSubHeader">Размеры</h4>
+<span class="label label-default col-sm-2" style="margin-right: 15px">Высота в px</span>
+<input type="text" ng-model="newProcCfg.settings.defaultHeight" placeholder="Высота бокса" class="input-sm"/>
+<br>
+<span class="label label-default col-sm-2" style="margin-right: 15px">Ширина в px</span>
+<input type="text" ng-model="newProcCfg.settings.defaultWidth" placeholder="Ширина бокса" class="input-sm"/>
+
+<hr class="shortHR">
+<h4 class="yellowSubHeader">Тип таблицы</h4>
+<select class="input-sm" ng-options="o.fullName for o in tableOptions" ng-model="defaultTable"
+        ng-change="selectDefaultTable()"></select>

@@ -1,12 +1,10 @@
 /**
  * Created by Hel on 14.10.2015.
  */
-tstApp.controller('NewProcessorController', function ($scope, $rootScope, REST, $state, ngToast, $uibModal) {
-
+tstApp.controller('NewProcessorController', function ($scope, $rootScope, REST, $state, $uibModal) {
   //imagine we ve got it
   $scope.procsIcanEdit = $rootScope.mycharts;
 
-  console.log($scope.procsIcanEdit)
 
   $scope.editProcessor = function (procID) {
 

@@ -11,7 +11,6 @@ tstApp.controller('BoxController', function ($scope, $state, chartsOptions, $roo
     /////////////////////////////////////////////////////////////////////////////
     //FIRST OF ALL, LETS REST OUR DATA
     /////////////////////////////////////////////////////////////////////////////
-
     REST.getChartData($rootScope.dashId, $scope.chartInfo.processor)
       .then(function (chartDatus) {
         //получить  дата

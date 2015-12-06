@@ -4,6 +4,40 @@
 tstApp.factory("ServiceDraw", function ($rootScope, chartsOptions) {
 
   return {
+
+    returnDXInstance: function (whoToRedraw, selector) {
+      switch (whoToRedraw) {
+        case "pie":
+          var chart = $(selector).dxPieChart('instance');
+          break
+        case "map":
+          var chart = $(selector).dxVectorMap('instance');
+          break
+        case "gauge":
+          var chart = $(selector).dxCircularGauge('instance');
+          break
+        case "scale":
+          var chart = $(selector).dxLinearGauge('instance');
+          break
+        case "text":
+          var table = $(selector).dxTextArea('instance');
+          break
+        case "pivot":
+          var table = $(selector).dxPivotGrid('instance');
+          break
+        case "simple":
+          var table = $(selector).dxDataGrid('instance');
+          break
+        case "table":
+          //do nothing
+          break
+        default:
+          var chart = $(selector).dxChart('instance');
+
+          return chart;
+      }
+    },
+
     whoToRedraw: function (whoToRedraw, selector, chartInfo, data) {
       $rootScope.mycharts[chartInfo.id].active = whoToRedraw;
       //$scope.whoIsActive = whoToRedraw;
@@ -66,7 +100,7 @@ tstApp.factory("ServiceDraw", function ($rootScope, chartsOptions) {
         title: {
           text: chartInfo.name,
           font: {
-            color: 'black',
+            color:  $rootScope.theme == 'light' ? 'black' : 'orange',
             family: 'Play',
             opacity: 0.9,
             size: 20,
@@ -158,8 +192,9 @@ tstApp.factory("ServiceDraw", function ($rootScope, chartsOptions) {
         },
         title: {
           text: chartInfo.name,
+          position: 'top-left',
           font: {
-            color: 'black',
+            color:  $rootScope.theme == 'light' ? 'black' : 'orange',
             family: 'Play',
             opacity: 0.9,
             size: 20,
@@ -215,7 +250,13 @@ tstApp.factory("ServiceDraw", function ($rootScope, chartsOptions) {
         title: {
           text: chartInfo.name,
           position: 'top-left',
-          font: chartsOptions.chartNameOptions.font
+          font: {
+            color:  $rootScope.theme == 'light' ? 'black' : 'orange',
+            family: 'Play',
+            opacity: 0.9,
+            size: 20,
+            weight: 400
+          }
         },
         //margin:  chartsOptions.chartNameOptions.margin,
         margin: {
@@ -460,7 +501,7 @@ tstApp.factory("ServiceDraw", function ($rootScope, chartsOptions) {
         //  top: 20,
         //  bottom: 20
         //},
-        value: textConfig.caption + '\r\n' +  data[0].value,
+        value: textConfig.caption + '\r\n' + data[0].value,
         activeStateEnabled: false,
         //height: $(selector).height(),
         //width: $(selector).width(),
@@ -477,8 +518,6 @@ tstApp.factory("ServiceDraw", function ($rootScope, chartsOptions) {
     //*************************************************************
     //***************************PIE*****************************
     //*************************************************************
-
-
     pie: function (chartInfo, data, selector, type) {
 
 
@@ -504,7 +543,7 @@ tstApp.factory("ServiceDraw", function ($rootScope, chartsOptions) {
         title: {
           text: chartInfo.name,
           font: {
-            color: 'black',
+            color:  $rootScope.theme == 'light' ? 'black' : 'orange',
             family: 'Play',
             opacity: 0.9,
             size: 20,

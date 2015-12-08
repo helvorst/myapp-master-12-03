@@ -7,12 +7,17 @@ tstApp.factory("ServiceToast", function (toasty, $rootScope) {
 
     cookToast: function (message, importance) {
 
-      if(this.prev != message) {
+      if (this.prev != message) {
+        var id = undefined;
 
-      var conf = {
+        var conf = {
           msg: message,
-          sound: !$rootScope.mute
+          sound: !$rootScope.mute,
+          onAdd: function () {
+            id = this.id;
+          }
         }
+
 
         if (importance == 'warning')
           toasty.warning(conf);
@@ -27,12 +32,19 @@ tstApp.factory("ServiceToast", function (toasty, $rootScope) {
         if (importance == 'default')
           toasty(conf);
 
+
         this.prev = message;
+
+        return id;
       }
     },
 
     dismissAll: function () {
       toasty.clear();
+    },
+
+    dismissById: function (id) {
+      toasty.clear(id);
     }
   }
 })

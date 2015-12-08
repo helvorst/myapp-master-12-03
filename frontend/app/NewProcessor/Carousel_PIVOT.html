@@ -1,7 +1,7 @@
 <h3 class="yellowHeader">2/5 Пивот</h3>
-<hr class="shortHR">
-<small ng-if="tableConfig.table!='pivot'">Листайте дальше. Вы вы не выбирали пивотную таблицу</small>
-<div id="1_pivot" ng-if="tableConfig.table=='pivot'">
+<hr class="yellowHR">
+<small ng-if="defaultTable!='pivot'">Листайте дальше. Вы вы не выбирали пивотную таблицу</small>
+<div id="1_pivot" ng-if="defaultTable=='pivot'">
   <h4 class="yellowSubHeader">Добавить</h4>
   <a class="btn btn-success" ng-click="AddNewPivotRow()"><i class="fa fa-plus-circle fa-2x "></i> Ряд</a>
   <a class="btn btn-warning" ng-click="AddNewPivotColumn()"><i

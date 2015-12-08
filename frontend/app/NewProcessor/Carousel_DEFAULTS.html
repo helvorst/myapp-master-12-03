@@ -1,5 +1,12 @@
 <h3 class="yellowHeader">1/5 График</h3>
-<hr class="shortHR">
+<hr class="yellowHR">
+
+<h4 class="yellowSubHeader">Имя процессора</h4>
+
+<textarea type="text" ng-model="newName" placeholder="Имя нового процессора" class="input-md col-sm-12" style="margin-bottom: 10px"/>
+
+
+
 <h4 class="yellowSubHeader">Какого типа?</h4>
 
 <div id="chartType">
@@ -116,7 +123,7 @@
   </div>
 </div>
 
-<hr class="shortHR"> {{newProcCfg.settings.defaultWidth}}
+<hr class="shortHR">
 <h4 class="yellowSubHeader">Размеры</h4>
 <span class="label label-default col-sm-2" style="margin-right: 15px">Высота в px</span>
 <input type="text" ng-model="newProcCfg.settings.defaultHeight" placeholder="Высота бокса" class="input-sm"/>
@@ -126,5 +133,5 @@
 
 <hr class="shortHR">
 <h4 class="yellowSubHeader">Тип таблицы</h4>
-<select class="input-sm" ng-options="o.fullName for o in tableOptions" ng-model="defaultTable"
-        ng-change="selectDefaultTable()"></select>
+<select class="input-sm" ng-options="o.name as o.fullName for o in tableOptions" ng-model="defaultTable"
+        ng-change="selectDefaultTable(defaultTable)"></select>

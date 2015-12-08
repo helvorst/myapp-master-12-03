@@ -3,15 +3,16 @@
  */
 tstApp.controller("ZoomProcessorEditController", function ($scope, $uibModalInstance, DataToPassInModal, ServiceDraw,
                                                            ServiceResize, ServiceTable,
-                                                           $rootScope, $timeout, $window, ServiceToast, REST, $location, $anchorScroll ) {
-
-
+                                                           $rootScope, $timeout, $window, ServiceToast, REST, $location, $anchorScroll) {
 
 //---------------------------------------------------
 //------------SOMETHING TO EDIT? ---------------
 //---------------------------------------------------
   //which table will be default
-  $scope.tableOptions = [{fullName: 'Пивот', name: 'pivot'}, {fullName: 'Обычная', name: 'simple'}, {fullName: 'Нет', name: null}]
+  $scope.tableOptions = [{fullName: 'Пивот', name: 'pivot'}, {fullName: 'Обычная', name: 'simple'}, {
+    fullName: 'Нет',
+    name: null
+  }]
   $scope.pivotCols = [];
   $scope.pivotRows = [];
   $scope.pivotData = [];
@@ -81,19 +82,21 @@ tstApp.controller("ZoomProcessorEditController", function ($scope, $uibModalInst
     //chart config
     $scope.chartConfig = DataToPassInModal.processor.settings.chartConfig;
     //rewrite chart settings
-    if($scope.whoIsActive=='text')
+    if ($scope.whoIsActive == 'text')
       $scope.textConfig = $scope.chartConfig;
-    if($scope.whoIsActive=='gauge')
+    if ($scope.whoIsActive == 'gauge')
       $scope.gaugeConfig = $scope.chartConfig;
-    if($scope.whoIsActive=='map')
+    if ($scope.whoIsActive == 'map')
       $scope.mapConfig = $scope.chartConfig;
 
     //table config
     $scope.tableConfig = DataToPassInModal.processor.settings.tableConfig;
-    for (var i = 0; i < $scope.tableOptions.length; i++) {
-      if ($scope.tableConfig.table == $scope.tableOptions[i].name)
-        $scope.defaultTable = $scope.tableOptions[i];
-    }
+    delete $scope.tableConfig.texts;
+    if ($scope.tableConfig.hasOwnProperty('table'))
+      $scope.defaultTable = $scope.tableConfig.table;
+    else
+      $scope.defaultTable = null;
+
 
     for (var i = 0; i < $scope.dataConfig.length; i++) {
       //for pivot
@@ -143,11 +146,21 @@ tstApp.controller("ZoomProcessorEditController", function ($scope, $uibModalInst
   }
 
 
-
 //---------------------------------------------------
 //------------OPEN and CLOSE my MODAL ---------------
 //---------------------------------------------------
   $scope.ok = function () {
+    $uibModalInstance.close($scope.subject);
+  };
+  $scope.cancel = function () {
+
+    ServiceToast.dismissAll();
+    $uibModalInstance.dismiss('cancel');
+  };
+
+  $scope.save = function () {
+
+    $scope.collectChanges();
 
     //download it
     var uri = 'data:application/octet-stream;charset=utf-16le;base64,';
@@ -158,82 +171,84 @@ tstApp.controller("ZoomProcessorEditController", function ($scope, $uibModalInst
     a.href = excel;
     a.click();
     a.remove();
-
-    $uibModalInstance.close($scope.subject);
-
-
   };
-  $scope.cancel = function () {
-
-    ServiceToast.dismissAll();
-    $uibModalInstance.dismiss('cancel');
-  };
-
 //---------------------------------------------------
 //------------COLLECT CHANGES -----------------------
 //---------------------------------------------------
-  $scope.collectChanges = function(){
+  $scope.collectChanges = function () {
     //collect all settings
     $scope.newProcCfg.name = $scope.newName;
     $scope.newProcCfg.settings = {};
     $scope.newProcCfg.settings.defaultKind = $scope.whoIsActive;
     //CHART
     $scope.newProcCfg.settings.chartConfig = $scope.chartConfig;
+
     //TABLE
-    $scope.newProcCfg.settings.tableConfig = $scope.tableConfig;
+    $scope.newProcCfg.settings.tableConfig = {};
+    $scope.newProcCfg.settings.tableConfig.table = $scope.defaultTable;
+    if($scope.defaultTable=='pivot')
+      $scope.newProcCfg.settings.tableConfig.pivotConfig = $scope.tableConfig.pivotConfig;
 
     //DATA
     $scope.newProcCfg.settings.dataConfig = [];
-    for (var i = 0; i < $scope.pivotCols.length; i++) {
-      $scope.pivotCols[i].pivot.areaIndex = i;
-      $scope.newProcCfg.settings.dataConfig.push($scope.pivotCols[i]);
+
+    //attach all pivot's belongings
+    if($scope.defaultTable=='pivot') {
+      for (var i = 0; i < $scope.pivotCols.length; i++) {
+        $scope.pivotCols[i].pivot.areaIndex = i;
+        $scope.newProcCfg.settings.dataConfig.push($scope.pivotCols[i]);
+      }
+      for (var i = 0; i < $scope.pivotRows.length; i++) {
+        $scope.pivotRows[i].pivot.areaIndex = i;
+        $scope.newProcCfg.settings.dataConfig.push($scope.pivotRows[i]);
+      }
+      for (var i = 0; i < $scope.pivotData.length; i++) {
+        $scope.pivotData[i].pivot.areaIndex = i;
+        $scope.newProcCfg.settings.dataConfig.push($scope.pivotData[i]);
+      }
     }
-    for (var i = 0; i < $scope.pivotRows.length; i++) {
-      $scope.pivotRows[i].pivot.areaIndex = i;
-      $scope.newProcCfg.settings.dataConfig.push($scope.pivotRows[i]);
-    }
-    for (var i = 0; i < $scope.pivotData.length; i++) {
-      $scope.pivotData[i].pivot.areaIndex = i;
-      $scope.newProcCfg.settings.dataConfig.push($scope.pivotData[i]);
-    }
-    for (var i = 0; i < $scope.simpleFields.length; i++) {
-      $scope.simpleFields[i].areaIndex = i;
-      $scope.newProcCfg.settings.dataConfig.push($scope.simpleFields[i]);
+    //attach all pivot's belongings
+    if($scope.defaultTable=='simple') {
+      for (var i = 0; i < $scope.simpleFields.length; i++) {
+        $scope.simpleFields[i].areaIndex = i;
+        $scope.newProcCfg.settings.dataConfig.push($scope.simpleFields[i]);
+      }
     }
 
 
-
-    console.log( $scope.newProcCfg);
+    console.log($scope.newProcCfg);
   };
 
 
 //---------------------------------------------------
 //------------APPLY CHANGES -------------------------
 //---------------------------------------------------
-  $scope.apply = function (){
+  $scope.apply = function () {
 
     //it will fill  $scope.newProcCfg with updated values
     $scope.collectChanges();
 
-    ServiceToast.cookToast('Идет получение данных', 'wait');
+    var idToastWait = ServiceToast.cookToast('Идет получение данных', 'wait');
 
-   //then  LETS REST OUR DATA
+    //then  LETS REST OUR DATA
     REST.getChartData(105, $scope.newProcCfg.processor)
       .then(function (chartDatus) {
+
+
         //получить  дата
         var chartData = chartDatus.plain();
         console.log('got my data for proc XXXXXXXXXXXXX ' + $scope.newProcCfg.processor);
         $scope.myData = chartData;
         console.log($scope.myData);
 
-        ServiceToast.cookToast('Данные получены', 'success');
+        ServiceToast.dismissById(idToastWait);
+        ServiceToast.cookToast('Данные получены. Строк: ' + $scope.myData.length, 'success');
 
         if ($scope.whoIsActive != 'table')
           ServiceDraw.whoToRedraw($scope.whoIsActive, "#chart", $scope.newProcCfg, $scope.myData);
 
         if ($scope.newProcCfg.settings.tableConfig.table == 'simple') {
           ServiceTable.simpleTable("#simpleTable", $scope.newProcCfg.settings.dataConfig, $scope.myData);
-          console.log('ST')
         }
 
         if ($scope.tableConfig.table == 'pivot') {
@@ -247,15 +262,14 @@ tstApp.controller("ZoomProcessorEditController", function ($scope, $uibModalInst
         }
 
       }, function (error) {
-        console.log("Не удалось получить данные для процессора дэшборда с ИД " +$scope.newProcCfg.processor);
+        console.log("Не удалось получить данные для процессора дэшборда с ИД " + $scope.newProcCfg.processor);
         console.log(error);
         ServiceToast.cookToast('Ошибка получения данных', 'error');
       })
 
 
-
-
   };
+
 
   //sortable opts to move elements
   $scope.sortableOptionsForFields = {
@@ -268,14 +282,14 @@ tstApp.controller("ZoomProcessorEditController", function ($scope, $uibModalInst
   $scope.$on("angular-resizable.resizing", function (event, args) {
     //Refresh
     ServiceResize.renderChartDependingOnItsType($scope.whoIsActive, "#chart");
-    if ($scope.tableConfig.table == 'pivot')
+    if ($scope.defaultTable.table == 'pivot')
       ServiceResize.renderChartDependingOnItsType('pivot', "#pivotTable");
-    if ($scope.tableConfig.table == 'simple')
+    if ($scope.defaultTable.table == 'simple')
       ServiceResize.renderChartDependingOnItsType('simple', "#simpleTable");
 
   });
 
-  $scope.scrollToTop = function(){
+  $scope.scrollToTop = function () {
     $location.hash('zoomProcessorBottomPanel');
     $anchorScroll();
   };
@@ -283,6 +297,7 @@ tstApp.controller("ZoomProcessorEditController", function ($scope, $uibModalInst
 
   //who was selected as default chart
   $scope.selectDefaultChart = function (selectedChart) {
+
     $scope.whoIsActive = selectedChart;
 
     var fullNameOfAChart = '';
@@ -341,11 +356,18 @@ tstApp.controller("ZoomProcessorEditController", function ($scope, $uibModalInst
 
     ServiceToast.cookToast('Вы выбрали дефолтный чарт: ' + fullNameOfAChart, 'info')
 
+
+
   };
 
   //who was selected as default table
-  $scope.selectDefaultTable = function () {
-    ServiceToast.cookToast('Вы выбрали дефолтную таблицу: ' + $scope.defaultTable.fullName, 'info')
+  $scope.selectDefaultTable = function (tbl) {
+    $scope.defaultTable = tbl;
+    for (var i = 0; i < $scope.tableOptions.length; i++)
+      if ($scope.defaultTable == $scope.tableOptions[i].name)
+        ServiceToast.cookToast('Вы выбрали дефолтную таблицу: ' + $scope.tableOptions[i].fullName, 'info')
+
+
   };
 
 
@@ -415,12 +437,13 @@ tstApp.controller("ZoomProcessorEditController", function ($scope, $uibModalInst
   $scope.addNewGroup = function () {
     $scope.mapConfig.grouping.groups.push('Размер группы значений');
   }
-  $scope.mapAreas = [{location: 'app/ko/ko', name: 'Кировская область'}, {location: 'zzzz', name: 'Что-то еще' }];
-  $scope.markerTypes = [{ type: 'bubble', name: 'пузырь'}, { type: 'pie', name: 'пирог'}, { type: 'image', name: 'картинка'}];
-  $scope.paletteTypes = ['Default' , 'Soft Pastel' , 'Harmony Light' , 'Pastel' , 'Bright' , 'Soft' , 'Ocean' , 'Vintage' , 'Violet']
+  $scope.mapAreas = [{location: 'app/ko/ko', name: 'Кировская область'}, {location: 'zzzz', name: 'Что-то еще'}];
+  $scope.markerTypes = [{type: 'bubble', name: 'пузырь'}, {type: 'pie', name: 'пирог'}, {
+    type: 'image',
+    name: 'картинка'
+  }];
+  $scope.paletteTypes = ['Default', 'Soft Pastel', 'Harmony Light', 'Pastel', 'Bright', 'Soft', 'Ocean', 'Vintage', 'Violet']
   $scope.mapArea = $scope.mapAreas[0].location;
-
-
 
 
 })

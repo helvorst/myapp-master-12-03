@@ -142,7 +142,9 @@ section {
   max-height: 2000px;
   overflow-x: hidden;
   margin: 10px;
+  min-height: 1000px;
   /*background: whitesmoke;*/
+  /*opacity: .5;*/
 }
 
 .zoomViewLeftPanel {

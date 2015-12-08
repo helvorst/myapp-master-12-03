@@ -1,12 +1,9 @@
 .processorCarouselPanel {
   background: #3A3F44;
-  margin-left: 20px;
-  margin-right: 20px;
-  /*padding: 10px;*/
-  padding-top: 5px;
-  height: 1000px;
-  /*max-height: 2000px;*/
-  /*overflow-x: hidden;*/
+  margin: 15px;
+  padding: 15px;
+  height: auto;
+  border-radius: 5px;
 }
 
 .carousel{
@@ -39,9 +36,9 @@
 }
 
 .dxBOX{
-  margin: 10px;
-  margin-top: 20px;
-  /*border: 1px solid orange;*/
+  margin: 15px;
   height: 100%;
   position: relative;
+  padding: 15px;
+  border-radius: 5px;
 }

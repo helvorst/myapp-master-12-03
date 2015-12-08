@@ -34,7 +34,10 @@ tstApp.factory("ServiceDraw", function ($rootScope, chartsOptions) {
         default:
           var chart = $(selector).dxChart('instance');
 
-          return chart;
+          if (chart)
+            return chart;
+          if (table)
+            return table;
       }
     },
 
@@ -100,7 +103,7 @@ tstApp.factory("ServiceDraw", function ($rootScope, chartsOptions) {
         title: {
           text: chartInfo.name,
           font: {
-            color:  $rootScope.theme == 'light' ? 'black' : 'orange',
+            color: $rootScope.theme == 'light' ? 'black' : 'orange',
             family: 'Play',
             opacity: 0.9,
             size: 20,
@@ -194,7 +197,7 @@ tstApp.factory("ServiceDraw", function ($rootScope, chartsOptions) {
           text: chartInfo.name,
           position: 'top-left',
           font: {
-            color:  $rootScope.theme == 'light' ? 'black' : 'orange',
+            color: $rootScope.theme == 'light' ? 'black' : 'orange',
             family: 'Play',
             opacity: 0.9,
             size: 20,
@@ -251,7 +254,7 @@ tstApp.factory("ServiceDraw", function ($rootScope, chartsOptions) {
           text: chartInfo.name,
           position: 'top-left',
           font: {
-            color:  $rootScope.theme == 'light' ? 'black' : 'orange',
+            color: $rootScope.theme == 'light' ? 'black' : 'orange',
             family: 'Play',
             opacity: 0.9,
             size: 20,
@@ -543,7 +546,7 @@ tstApp.factory("ServiceDraw", function ($rootScope, chartsOptions) {
         title: {
           text: chartInfo.name,
           font: {
-            color:  $rootScope.theme == 'light' ? 'black' : 'orange',
+            color: $rootScope.theme == 'light' ? 'black' : 'orange',
             family: 'Play',
             opacity: 0.9,
             size: 20,

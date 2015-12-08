@@ -158,6 +158,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   max-height: 2000px;
   overflow-x: hidden;
   margin: 10px;
+  min-height: 1000px;
   /*color: greenyellow;*/
 }
 
@@ -197,3 +198,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   z-index: 2000 !important;
 }
 
+.label-default {
+  background-color: dimgrey;
+}
+
+.label {
+  font-weight: normal;
+}
